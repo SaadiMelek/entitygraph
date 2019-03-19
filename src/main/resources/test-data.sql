@@ -1,9 +1,0 @@
---One House
-INSERT INTO HOUSES VALUES (1)
-
---Contains two rooms
-INSERT INTO ROOMS VALUES (1, 1)
-
---Room One contains two doors
-INSERT INTO DOORS VALUES (1, 1)
-INSERT INTO DOORS VALUES (2, 1)

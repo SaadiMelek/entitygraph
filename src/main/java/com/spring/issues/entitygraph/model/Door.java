@@ -1,18 +1,22 @@
 package com.spring.issues.entitygraph.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name = "DOORS")
 public class Door {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DOOR_ID")
-	private Room room;
+	@ManyToOne
+	@JoinColumn(name = "house_id", nullable = false)
+	private House house;
 
 	public Door() {
 		super();
@@ -26,12 +30,16 @@ public class Door {
 		this.id = id;
 	}
 
-	public Room getRoom() {
-		return room;
+	public House getHouse() {
+		return house;
 	}
 
-	public void setRoom(Room room) {
-		this.room = room;
+	public void setHouse(House house) {
+		this.house = house;
 	}
 
+	@Override
+	public String toString() {
+		return "Door [id=" + id + ", house=" + house + "]";
+	}
 }

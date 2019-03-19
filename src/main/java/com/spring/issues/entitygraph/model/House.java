@@ -3,23 +3,25 @@ package com.spring.issues.entitygraph.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "HOUSES")
 public class House {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy = "house", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
 	private Set<Room> rooms = new HashSet<>();
+
+	@OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
+	private Set<Door> doors = new HashSet<>();
 
 	public House() {
 
@@ -41,9 +43,12 @@ public class House {
 		this.rooms = rooms;
 	}
 
-	public House(Set<Room> rooms) {
-		super();
-		this.rooms = rooms;
+	public Set<Door> getDoors() {
+		return doors;
+	}
+
+	public void setDoors(Set<Door> doors) {
+		this.doors = doors;
 	}
 
 	@Override
